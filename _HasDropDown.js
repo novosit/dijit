@@ -110,11 +110,11 @@ define([
 			//
 			// Also, don't call preventDefault() on MSPointerDown event (on IE10) because that prevents the button
 			// from getting focus, and then the focus manager doesn't know what's going on (#17262)
-			if(e.type != "MSPointerDown" && e.type != "pointerdown"){
+			if (e.type != "MSPointerDown" && e.type != "pointerdown") {
 				e.preventDefault();
 			}
 
-			this._docHandler = this.own(on(this.ownerDocument, touch.release, lang.hitch(this, "_onDropDownMouseUp")))[0];
+			this._docHandler = this.own(on(this.ownerDocument, e.type === 'mousedown'? 'mouseup' : touch.release, lang.hitch(this, "_onDropDownMouseUp")))[0];
 
 			this.toggleDropDown();
 		},
@@ -180,7 +180,7 @@ define([
 				if(dropDown.focus && (dropDown.autoFocus !== false || (e.type == "mouseup" && !this.hovering))){
 					// Do it on a delay so that we don't steal back focus from the dropdown.
 					this._focusDropDownTimer = this.defer(function(){
-						dropDown.focus();
+					    dropDown.focus();
 						delete this._focusDropDownTimer;
 					});
 				}
@@ -193,12 +193,12 @@ define([
 			}
 		},
 
-		_onDropDownClick: function(/*Event*/ e){
-			// The drop down was already opened on mousedown/keydown; just need to stop the event
-			if(this._stopClickEvents){
-				e.stopPropagation();
-				e.preventDefault();
-			}
+		_onDropDownClick: function (/*Event*/ e) {
+		    // The drop down was already opened on mousedown/keydown; just need to stop the event
+		    if (this._stopClickEvents) {
+		        e.stopPropagation();
+		        e.preventDefault();
+		    }
 		},
 
 		buildRendering: function(){
@@ -229,6 +229,7 @@ define([
 			var keyboardEventNode = this.focusNode || this.domNode;
 			this.own(
 				on(this._buttonNode, touch.press, lang.hitch(this, "_onDropDownMouseDown")),
+				on(this._buttonNode, 'mousedown', lang.hitch(this, "_onDropDownMouseDown")),
 				on(this._buttonNode, "click", lang.hitch(this, "_onDropDownClick")),
 				on(keyboardEventNode, "keydown", lang.hitch(this, "_onKey")),
 				on(keyboardEventNode, "keyup", lang.hitch(this, "_onKeyUp"))
@@ -306,9 +307,10 @@ define([
 
 			// Close dropdown but don't focus my <input>.  User may have focused somewhere else (ex: clicked another
 			// input), and even if they just clicked a blank area of the screen, focusing my <input> will unwantedly
-			// popup the keyboard on mobile.
-			this.closeDropDown(false);
-
+		    // popup the keyboard on mobile.
+		    if (!this._opened) {
+		        this.closeDropDown(false);
+		    }
 			this.inherited(arguments);
 		},
 
