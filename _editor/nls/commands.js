@@ -1,4 +1,15 @@
-define({ root:
+(function (factory) {
+    'use strict';
+    var req = require,
+        isAmd = typeof (define) === 'function' && define.amd;
+    if (isAmd) {
+        define([], factory);
+    }
+    else if (typeof(exports) === 'object') {
+        module.exports = factory();
+    }
+})(function () {
+	return ({ root:
 //begin v1.x content
 ({
 	'bold': 'Bold',
@@ -51,38 +62,39 @@ define({ root:
 })
 //end v1.x content
 ,
-"zh": true,
-"zh-tw": true,
-"uk": true,
-"tr": true,
-"th": true,
-"sv": true,
-"sl": true,
-"sk": true,
-"ru": true,
-"ro": true,
-"pt": true,
-"pt-pt": true,
-"pl": true,
-"nl": true,
-"nb": true,
-"ko": true,
-"kk": true,
-"ja": true,
-"it": true,
-"id": true,
-"hu": true,
-"hr": true,
-"he": true,
+// "zh": true,
+// "zh-tw": true,
+// "uk": true,
+// "tr": true,
+// "th": true,
+// "sv": true,
+// "sl": true,
+// "sk": true,
+// "ru": true,
+// "ro": true,
+// "pt": true,
+// "pt-pt": true,
+// "pl": true,
+// "nl": true,
+// "nb": true,
+// "ko": true,
+// "kk": true,
+// "ja": true,
+// "it": true,
+// "id": true,
+// "hu": true,
+// "hr": true,
+// "he": true,
 "fr": true,
-"fi": true,
+// "fi": true,
 "es": true,
-"el": true,
-"de": true,
-"da": true,
-"cs": true,
-"ca": true,
-"bg": true,
-"az": true,
-"ar": true
+// "el": true,
+// "de": true,
+// "da": true,
+// "cs": true,
+// "ca": true,
+// "bg": true,
+// "az": true,
+// "ar": true
+});
 });

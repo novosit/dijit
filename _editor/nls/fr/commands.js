@@ -1,4 +1,15 @@
-define(
+(function (factory) {
+    'use strict';
+    var req = require,
+        isAmd = typeof (define) === 'function' && define.amd;
+    if (isAmd) {
+        define([], factory);
+    }
+    else if (typeof(exports) === 'object') {
+        module.exports = factory();
+    }
+})(function () {
+	return (
 ({
 	'bold': 'Gras',
 	'copy': 'Copier',
@@ -49,3 +60,4 @@ define(
 	'appleKey':'\u2318${0}' // "command" or open-apple key on Macintosh
 })
 );
+});

@@ -20,7 +20,7 @@ define([
 	"dojo/topic",
 	"dojo/_base/window", // win.body()
 	"./Destroyable",
-	"dojo/has!dojo-bidi?./_BidiMixin",
+	"./_BidiMixin",
 	"./registry"    // registry.getUniqueId(), registry.findWidgets()
 ], function(require, array, aspect, config, connect, declare,
 			dom, domAttr, domClass, domConstruct, domGeometry, domStyle, has, kernel,
