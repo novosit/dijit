@@ -176,7 +176,7 @@ define([
 
 		postMixInProperties: function(){
 			this.inherited(arguments);
-			var messages = i18n.getLocalization("dijit", "loading", this.lang);
+			var messages = nlsLoading; // i18n.getLocalization("dijit", "loading", this.lang);
 			this.loadingMessage = string.substitute(this.loadingMessage, messages);
 			this.errorMessage = string.substitute(this.errorMessage, messages);
 		},
